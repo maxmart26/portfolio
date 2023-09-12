@@ -1,51 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>portfolio</title>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a6a5f10a11.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <nav>
-        <h1>MTORGUE</h1>
+        <h1>MAXIME TORGUE</h1>
         <ul>
             <li><a href="#">PRESENTATION</a></li>
             <li><a href="#">PROJET</a></li>
             <li><a href="#">COMPETENCES</a></li>
             <li><a href="#">CONTACT</a></li>
-            <li>CV</li>
+            <li id="telechargement" ><a href="CV Maxime TORGUE.docx">CV</a></li>
         </ul>
     </nav>
     <main>
         <section id="presentation">
-            <div>
+            <div id="me">
                 <h2>A PROPOS DE MOI</h2>
                 <p>Apres de nombreuses années dans des secteur différents mais tres passionanant je choisi de changer pour un nouveau souffle a ma carriére en devenant Dévellopeur web .
-                jai commancé par une formation  chez openclassroom pour un titre de développeur Web/Mobile, je realise de nombreux projet qui me tienne a coeur et d’autre pour apprendre de nouvelle chose 
+                j'ai commancé par une formation  chez openclassroom pour un titre de développeur Web/Mobile, je realise de nombreux projet qui me tienne a coeur et d’autre pour apprendre de nouvelle chose 
                 </p>
             </div>
             <img src="img/IMG_0495.jpg" alt="photo de moi">
         </section>
-        <section>
-            <div id="img-add">
-            </div>
+        <section id="projet">
             <h3>PROJETS</h3>
-            <div>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
+            <div id="boucherie">
+                <h4>BOUCHERIE</h4>
+                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
+                <img src="img/image-projet/boucherie.png" alt="photo du projet boucherie">
+                <div id="icon">
+                    <h5>TECHNOLOGIE</h5>
+                    <ul>
+                        <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
+                        <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
+                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
+                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
+                </div>
             </div>
-            <div id="title-add-and-text">
+            <div id="vieux">
+                <h4>LE VIEUX</h4>
+                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
+                <img src="img/image-projet/vieux.png" alt="photo du projet le vieux">
+                <div id="icon">
+                    <h5>TECHNOLOGIE</h5>
+                    <ul>
+                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
+                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
+                        <li><iconify-icon icon="fa-brands:node-js"></iconify-icon></li>
+                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
+                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
+                </div>
+            </div>
+            <div>
+                <h4>booki</h4>
+                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
+                <img src="img/image-projet/booki.png" alt="photo du site bookie">
+                <div id="icon">
+                    <h5>TECHNOLOGIE</h5>
+                    <ul>
+                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
+                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
+                </div>
             </div>
         </section>
-        <section>
+        <section id="competence">
             <h4>COMPETENCES</h4>
-            <div>
-                <div>
+            <article>
+                <div id="icon">
                     <h5>Front-end</h5>
                     <ul>
                         <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
@@ -54,7 +82,7 @@
                         <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
                         <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
                 </div>
-                <div>
+                <div id="icon">
                     <h5>Back-end</h5>
                     <ul>
                         <li><iconify-icon icon="cib:js"></iconify-icon></li>
@@ -62,27 +90,29 @@
                         <li><iconify-icon icon="tabler:api"></iconify-icon></li>
                     </ul>
                 </div>
-                <div>
+                <div id="icon">
                     <h5>Outils</h5>
-                    <li><iconify-icon icon="teenyicons:figma-outline"></iconify-icon></li>
-                    <li><iconify-icon icon="devicon-plain:visualstudio"></iconify-icon></li>
-                    <li><iconify-icon icon="logos:github-icon"></iconify-icon></li>
-                    <li><iconify-icon icon="bi:trello"></iconify-icon></li>
-                    <li><iconify-icon icon="simple-icons:postman"></iconify-icon></li>
+                    <ul>
+                        <li><iconify-icon icon="teenyicons:figma-outline"></iconify-icon></li>
+                        <li><iconify-icon icon="devicon-plain:visualstudio"></iconify-icon></li>
+                        <li><iconify-icon icon="logos:github-icon"></iconify-icon></li>
+                        <li><iconify-icon icon="bi:trello"></iconify-icon></li>
+                        <li><iconify-icon icon="simple-icons:postman"></iconify-icon></li>
+                    </ul>
                 </div>
-            </div>
+            </article>
         </section>
-        <section>
+        <section id="contact">
             <h6>Contactez-moi<iconify-icon icon="mdi:hand-wave"></iconify-icon></h6>
-            <div>
+            <article>
                 <p>Envie d’en savoir plus ? Envoyer-moi un message et parlons-en</p>
                 <form action="#">
                     <input type="text" placeholder="Nom">
                     <input type="text" placeholder="Email">
                     <input type="text" placeholder="Message">
-                    <button>ENVOYER<iconify-icon icon="ic:outline-mail"></iconify-icon></button>
+                    <button>ENVOYER<iconify-icon id="iconify" icon="ic:outline-mail"></iconify-icon></button>
                 </form>
-            </div>
+            </article>
         </section>
     </main>
     <footer>
