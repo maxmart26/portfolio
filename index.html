@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Matorgue</h1>
+        <nav>
+            <p>PRESENTATION</p>
+            <p>PROJET</p>
+            <p>COMPETENCES</p>
+            <p>CONTACT</p>
+            <a href="/cv/CV Maxime TORGUE.pdf" download="CV MAXIME TORGUE"><p>CV</p></a>
+        </nav>
+    </header>
+    <main>
+        <section id="presentation">
+            <div id="pre_text">
+                <h2>À PROPOS DE MOI</h2>
+                <p>
+                    Après de nombreuses années dans des secteurs différents mais très passionnants, j’ai choisi de changer pour donner un nouveau souffle à ma carrière en devenant développeur web.</p>
+
+                <p>    J’ai commencé par une formation chez OpenClassrooms pour obtenir un titre de développeur Web/Mobile. Je réalise de nombreux projets qui me tiennent à cœur, ainsi que d’autres pour apprendre de nouvelles chose
+                </p>
+            </div>
+            <img src="/img/Profile.jpg">
+        </section>
+        <section id="projet">
+          <h3>PROJETS</h3>
+          <div class="projets">
+            <!-- Projet 1 -->
+            <div class="projet active" id="boucherie">
+              <img src="img/projets/boucherie.png" alt="photo du projet boucherie">
+              <div class="texte">
+                <div class="boutons">
+                  <button data-index="0">1</button>
+                  <button data-index="1">2</button>
+                  <button data-index="2">3</button>
+                </div>
+                <h4>BOUCHERIE</h4>
+                <p>Projet perso pour mon ancien patron en boucherie, en cours de développement</p>
+                <div id="icon">
+                  <h5>TECHNOLOGIE</h5>
+                  <ul>
+                    <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
+                    <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
+                    <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
+                    <li><iconify-icon icon="tabler:api"></iconify-icon></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Projet 2 -->
+            <div class="projet" id="RS">
+              <img src="img/projets/Restrospective_studio.png" alt="photo de Restrospective_studio">
+              <div class="texte">
+                <div class="boutons">
+                  <button data-index="0">1</button>
+                  <button data-index="1">2</button>
+                  <button data-index="2">3</button>
+                </div>
+                <h4>RESTROSPECTIVE STUDIO</h4>
+                <p>Projet profesionnel pour une amie fait avec une collègue de 42, toujours en développement sur la partie front, mais bientôt déployé entièrement avec frontend/backend/paiement/API et autres.</p>
+                <div id="icon">
+                  <h5>TECHNOLOGIE</h5>
+                  <ul>
+                    <li><!-- SVG icon (Next.js ou autre) --></li>
+                    <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
+                    <li><iconify-icon icon="fa-brands:node-js"></iconify-icon></li>
+                    <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
+                    <li><iconify-icon icon="tabler:api"></iconify-icon></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Projet 3 -->
+            <div class="projet" id="Transcendence">
+              <img src="img/projets/trans.png" alt="photo du projet Transcendence">
+              <div class="texte">
+                <div class="boutons">
+                  <button data-index="0">1</button>
+                  <button data-index="1">2</button>
+                  <button data-index="2">3</button>
+                </div>
+                <h4>TRANSCENDENCE</h4>
+                <p>Dernier projet de 42, avec 2 autres collègues. Je me suis occupé de la partie DevOps et backend du site.</p>
+                <div id="icon">
+                  <h5>TECHNOLOGIE</h5>
+                  <ul>
+                    <li><!-- SVG icon (NestJS ou autre) --></li>
+                    <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
+                    <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section id="competence">
+            <h4>COMPETENCES</h4>
+            <article>
+                <div id="icon">
+                    <h5>Front-end</h5>
+                    <ul>
+                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
+                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
+                        <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
+                        <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
+                </div>
+                <div id="icon">
+                    <h5>Back-end</h5>
+                    <ul>
+                        <li><iconify-icon icon="cib:js"></iconify-icon></li>
+                        <li><iconify-icon icon="fa-brands:node-js"></iconify-icon></li>
+                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
+                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
+                    </ul>
+                </div>
+                <div id="icon">
+                    <h5>Outils</h5>
+                    <ul>
+                        <li><iconify-icon icon="teenyicons:figma-outline"></iconify-icon></li>
+                        <li><iconify-icon icon="devicon-plain:visualstudio"></iconify-icon></li>
+                        <li><iconify-icon icon="logos:github-icon"></iconify-icon></li>
+                        <li><iconify-icon icon="bi:trello"></iconify-icon></li>
+                        <li><iconify-icon icon="simple-icons:postman"></iconify-icon></li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </main>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

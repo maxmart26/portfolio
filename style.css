@@ -1,61 +1,266 @@
 body {
-  background-color: red;
-  max-width: 1440px;
-  margin: auto;
-  margin-top: 0;
-}
-body nav {
-  background-color: #fff;
-  width: 1440px;
-  margin: 0 auto;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-body nav h1 {
-  font-size: 2em;
-}
-body nav ul {
-  margin: 0;
-  display: flex;
-}
-body nav ul li {
-  list-style-type: none;
-  padding: 0 2.2em 0;
-  font-size: 1.2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-body nav ul li a {
-  text-decoration: none;
-  color: #000;
-}
-body main #presentation {
-  display: flex;
-  background-color: #000;
-  color: #fff;
-  justify-content: center;
-}
-body main #presentation img {
-  max-width: 20%;
-  padding: 5em;
-}
-body main #presentation #me {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5em;
-}
-body main #presentation #me h2 {
-  font-size: 2em;
-}
-body main #presentation #me p {
-  font-size: 1.2em;
+    margin: 0;
+    padding: 0;
 }
 
-/*# sourceMappingURL=style.css.map */
+header{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #3F3F3F;
+    justify-content: space-around;
+}
+h1 {
+    font-size: 2em;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding-top: 1em;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#presentation {
+    display: flex;
+    align-items: center; /* aligne verticalement texte et image */
+    gap: 20px; /* petit espace entre image et texte */
+    background-color: #3F3F3F;
+    color: white;
+    padding: 45px 80px;
+}
+
+#presentation img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0; /* empêche l'image de rétrécir dans le flex */
+    border-radius: 8px; /* optionnel : coins arrondis */
+}
+
+#pre_text {
+    flex: 1; /* prend tout l’espace dispo sauf celui de l’image */
+}
+
+#presentation img{
+    display: block;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+body main #competence {
+    display: flex;
+    flex-direction: column;
+  }
+  body main #competence h4 {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+  }
+  body main #competence article {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  body main #competence article #icon {
+    width: 45%;
+    position: relative;
+  }
+  #icon h5 {
+    position: absolute;
+    top: -25px; /* ← ajuste pour faire flotter au-dessus de la ul */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    z-index: 1; /* ← s'assure que h5 passe au-dessus */
+  }
+  
+  #icon ul {
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 0 0;
+    margin-top: 30px; /* optionnel, pour éviter que le h5 ne coupe le contenu */
+  }
+  body main #competence article #icon ul li {
+    list-style-type: none;
+    font-size: 2.5em;
+  }
+
+  #projet {
+    text-align: center;
+  }
+
+  .projets {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .projet {
+    display: none;
+  }
+
+  .projet.active {
+    display: block;
+  }
+
+  .boutons {
+    margin-top: 20px;
+  }
+
+  .boutons button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+  }
+
+  .boutons button.active {
+    background-color: #333;
+    color: white;
+    border-radius: 25px;
+  }
+
+  #icon h5 {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    z-index: 1;
+  }
+
+  #icon {
+    position: relative;
+    margin-top: 20px;
+  }
+
+  #icon ul {
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+  }
+  #projet {
+    padding: 40px;
+  }
+  
+  #projet h3 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Boutons dans chaque projet */
+  .boutons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: 60%;
+    align-self: flex-start;
+  }
+  
+  .boutons button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .boutons button.active {
+    background-color: #3F3F3F;
+    color: white;
+    border-radius: 8px;
+  }
+  
+  /* Projet layout */
+  .projet {
+    min-width: 100%;
+    display: none;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 60px;
+  }
+  
+  .projet.active {
+    display: flex;
+  }
+  
+  /* Image du projet à gauche */
+  .projet img {
+    border-radius: 10px;
+    border: 5px solid #3F3F3F;
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  /* Zone texte à droite */
+  .texte {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+  }
+  
+  /* Titre et paragraphe */
+  .projet h4 {
+    font-size: 2em;
+    display: flex;
+    align-items: flex-start;
+    margin-left: 50%;
+    margin-top: 0;
+  }
+  
+  .projet p {
+    margin: 10px 0;
+  }
+  
+  /* Icônes technologies */
+  #icon {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  #icon h5 {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    z-index: 1;
+  }
+  
+  #icon ul {
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+    margin-top: 20px;
+  }
+  
