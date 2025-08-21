@@ -1,127 +1,402 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio</title>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio - MTORGUE</title>
+
+  <!-- Icônes de techno (hébergées) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <style>
+  /* ====== RESET & BASE ====== */
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;background:#f5f5f5;color:#222;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+
+  /* ====== NAV BAR ALIGN VARS ====== */
+  :root{
+    --bar-h:64px;     /* hauteur de la barre */
+    --link-h:36px;    /* hauteur des liens/boutons */
+    --gap:18px;
+  }
+
+  /* ====== HEADER ====== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:#333; color:#fff;
+    backdrop-filter:saturate(140%) blur(2px);
+  }
+  .bar{
+    max-width:1100px; margin:auto;
+    padding:0 20px;                        /* padding uniforme */
+    min-height:var(--bar-h);               /* hauteur fixe */
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{
+    display:flex; align-items:center;
+    font-weight:700; letter-spacing:.5px; line-height:1;
+  }
+
+  /* desktop nav */
+  nav.main{display:flex; align-items:center; gap:var(--gap); flex-wrap:wrap}
+  nav.main a{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:var(--link-h); padding:0 10px;
+    border-radius:8px; color:#fff; opacity:.9; transition:opacity .2s, background .2s;
+  }
+  nav.main a:hover{opacity:1; background:rgba(255,255,255,.08)}
+  .cv-link{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:var(--link-h); padding:0 12px;
+    border:1px solid rgba(255,255,255,.65); border-radius:8px;
+  }
+
+  /* ====== HAMBURGER (mobile) ====== */
+  .hamburger{
+    display:none; position:relative; width:44px; height:44px; margin-left:12px;
+    border-radius:12px; border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.06); cursor:pointer; place-items:center;
+  }
+  .hamburger:hover{background:rgba(255,255,255,.12)}
+  .hamburger .line{position:absolute;width:20px;height:2px;background:#fff;transition:.25s ease;border-radius:2px}
+  .hamburger .line:nth-child(1){transform:translateY(-7px)}
+  .hamburger .line:nth-child(2){opacity:1}
+  .hamburger .line:nth-child(3){transform:translateY(7px)}
+  .hamburger.active .line:nth-child(1){transform:rotate(45deg)}
+  .hamburger.active .line:nth-child(2){opacity:0}
+  .hamburger.active .line:nth-child(3){transform:rotate(-45deg)}
+
+  /* ====== DROPDOWN MOBILE ====== */
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.25s;z-index:90}
+  .backdrop.show{opacity:1;pointer-events:auto}
+  .mobile-menu{
+    position:fixed; top:var(--bar-h); left:12px; right:12px;   /* aligne sous la barre */
+    background:#1f1f1f; border:1px solid #343434; border-radius:16px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35); transform:translateY(-10px);
+    opacity:0; pointer-events:none; transition:.25s; z-index:99; overflow:hidden;
+  }
+  .mobile-menu.show{transform:translateY(0);opacity:1;pointer-events:auto}
+  .mobile-menu a{display:block;padding:14px 16px;color:#fff;border-bottom:1px solid #2b2b2b}
+  .mobile-menu a:last-child{border-bottom:0}
+  .mobile-menu a:hover{background:#2a2a2a}
+  .mobile-menu a.download{display:flex;justify-content:space-between;align-items:center}
+  .mobile-menu a.download span{font-size:.85rem;opacity:.8}
+
+  /* ====== ABOUT ====== */
+  .about{background:#444;color:#fff}
+  .about .wrap{max-width:1100px;margin:auto;padding:48px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+  .about h2{margin:0 0 .75rem}
+  .about p{opacity:.95}
+  .about img{width:180px;height:180px;object-fit:cover;border-radius:12px;justify-self:end;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+
+  /* ====== PROJECTS ====== */
+  .projects{max-width:1100px;margin:0 auto;padding:48px 20px}
+  .projects h2{text-align:center;margin:0 0 18px}
+  .carousel{
+    max-width:780px; width:100%; height:430px;      /* hauteur explicite */
+    margin:12px auto 0; position:relative;
+    border:1px solid #333; border-radius:12px; overflow:hidden; background:#111;
+  }
+  .slide{
+    position:absolute; inset:0; opacity:0; transition:opacity .5s ease;
+    pointer-events:none; visibility:hidden;           /* seules les actives cliquables */
+  }
+  .slide.active{opacity:1; pointer-events:auto; visibility:visible}
+  .slide img{
+    width:100%; height:100%; object-fit:cover; display:block; opacity:.95;
+  }
+  .caption{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;padding:12px 14px;display:grid;gap:8px}
+  .cap-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .cap-title{font-weight:700}
+  .cap-link{font-size:.9rem;padding:.35rem .6rem;border:1px solid #fff;border-radius:999px}
+  .cap-text{font-size:.92rem;opacity:.95}
+  .stack{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:.35rem .55rem;border-radius:999px;background:#fff;color:#111;font-weight:600;font-size:.8rem}
+  .badge i{font-size:18px}
+  .dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+  .dot{min-width:28px;height:28px;border-radius:999px;background:#bbb;border:0;cursor:pointer;padding:0 8px;font-weight:700}
+  .dot.active{background:#333;color:#fff}
+
+  /* ====== SKILLS ====== */
+  .skills{max-width:1100px;margin:0 auto;padding:48px 20px}
+  .skills h2{text-align:center;margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .card{background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.06);padding:18px}
+  .card h3{margin:0 0 .5rem}
+  .pillz{display:flex;flex-wrap:wrap;gap:10px}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #e7e7e7;border-radius:999px;padding:.4rem .7rem}
+  .pill i{font-size:20px}
+
+  /* ====== CONTACT ====== */
+  .contact{background:#333;color:#fff}
+  .contact .wrap{max-width:1100px;margin:auto;padding:48px 20px;text-align:center}
+  form{max-width:420px;margin:16px auto 0;display:grid;gap:12px}
+  input,textarea{padding:.85rem;border:0;border-radius:8px}
+  button.btn{padding:.85rem;border:0;border-radius:8px;background:#00adb5;color:#fff;cursor:pointer;transition:transform .05s}
+  button.btn:hover{filter:brightness(.95)}
+  button.btn:active{transform:translateY(1px)}
+  #form-status{margin-top:10px;font-weight:700}
+
+  /* ====== FOOTER ====== */
+  footer{background:#222;color:#fff;text-align:center;padding:16px}
+  .social{display:flex;gap:14px;justify-content:center;margin-top:8px}
+  .chip{display:inline-block;padding:.35rem .6rem;border:1px solid #fff;border-radius:999px;font-size:.85rem}
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width:900px){
+    nav.main{display:none}
+    .hamburger{display:grid}
+    .about .wrap{grid-template-columns:1fr;text-align:left}
+    .about img{justify-self:start}
+    .grid{grid-template-columns:1fr}
+    .carousel{height:300px}   /* hauteur mobile */
+  }
+</style>
+
 </head>
 <body>
-    <nav>
-        <h1>MAXIME TORGUE</h1>
-        <ul>
-            <li><a href="#">PRESENTATION</a></li>
-            <li><a href="#">PROJET</a></li>
-            <li><a href="#">COMPETENCES</a></li>
-            <li><a href="#">CONTACT</a></li>
-            <li id="telechargement" ><a href="CV Maxime TORGUE.docx">CV</a></li>
-        </ul>
+
+  <!-- HEADER -->
+  <header>
+    <div class="bar">
+      <div class="brand">MTORGUE</div>
+
+      <!-- Nav (desktop) -->
+      <nav class="main" aria-label="Navigation principale">
+        <a href="#about">PRESENTATION</a>
+        <a href="#projects">PROJET</a>
+        <a href="#skills">COMPETENCES</a>
+        <a href="#contact">CONTACT</a>
+        <a class="cv-link" href="CV Maxime TORGUE.docx" download>CV</a>
+      </nav>
+
+      <!-- Hamburger (mobile, plus classe) -->
+      <button class="hamburger" id="burger" aria-label="Ouvrir le menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span class="line"></span><span class="line"></span><span class="line"></span>
+      </button>
+    </div>
+
+    <!-- Backdrop + Menu déroulant mobile -->
+    <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+    <nav id="mobileMenu" class="mobile-menu" aria-label="Menu mobile">
+      <a href="#about">PRESENTATION</a>
+      <a href="#projects">PROJET</a>
+      <a href="#skills">COMPETENCES</a>
+      <a href="#contact">CONTACT</a>
+      <a class="download" href="CV Maxime TORGUE.docx" download>CV <span>(télécharger)</span></a>
     </nav>
-    <main>
-        <section id="presentation">
-            <div id="me">
-                <h2>A PROPOS DE MOI</h2>
-                <p>Apres de nombreuses années dans des secteur différents mais tres passionanant je choisi de changer pour un nouveau souffle a ma carriére en devenant Dévellopeur web .
-                j'ai commancé par une formation  chez openclassroom pour un titre de développeur Web/Mobile, je realise de nombreux projet qui me tienne a coeur et d’autre pour apprendre de nouvelle chose 
-                </p>
-            </div>
-            <img src="img/IMG_0495.jpg" alt="photo de moi">
-        </section>
-        <section id="projet">
-            <h3>PROJETS</h3>
-            <div id="boucherie">
-                <h4>BOUCHERIE</h4>
-                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
-                <img src="img/image-projet/boucherie.png" alt="photo du projet boucherie">
-                <div id="icon">
-                    <h5>TECHNOLOGIE</h5>
-                    <ul>
-                        <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
-                        <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
-                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
-                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
-                </div>
-            </div>
-            <div id="vieux">
-                <h4>LE VIEUX</h4>
-                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
-                <img src="img/image-projet/vieux.png" alt="photo du projet le vieux">
-                <div id="icon">
-                    <h5>TECHNOLOGIE</h5>
-                    <ul>
-                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
-                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
-                        <li><iconify-icon icon="fa-brands:node-js"></iconify-icon></li>
-                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
-                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
-                </div>
-            </div>
-            <div>
-                <h4>booki</h4>
-                <p>Projet de fin de formation pour obtenir mon titre de développeur web/mobile</p>
-                <img src="img/image-projet/booki.png" alt="photo du site bookie">
-                <div id="icon">
-                    <h5>TECHNOLOGIE</h5>
-                    <ul>
-                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
-                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
-                </div>
-            </div>
-        </section>
-        <section id="competence">
-            <h4>COMPETENCES</h4>
-            <article>
-                <div id="icon">
-                    <h5>Front-end</h5>
-                    <ul>
-                        <li><iconify-icon icon="icomoon-free:html-five"></iconify-icon></li>
-                        <li><iconify-icon icon="uiw:css3"></iconify-icon></li>
-                        <li><iconify-icon icon="fa-brands:node-js"></iconify-icon></li>
-                        <li><iconify-icon icon="akar-icons:react-fill"></iconify-icon></li>
-                        <li><iconify-icon icon="akar-icons:sass-fill"></iconify-icon></li>
-                </div>
-                <div id="icon">
-                    <h5>Back-end</h5>
-                    <ul>
-                        <li><iconify-icon icon="cib:js"></iconify-icon></li>
-                        <li><iconify-icon icon="simple-icons:mongodb"></iconify-icon></li>
-                        <li><iconify-icon icon="tabler:api"></iconify-icon></li>
-                    </ul>
-                </div>
-                <div id="icon">
-                    <h5>Outils</h5>
-                    <ul>
-                        <li><iconify-icon icon="teenyicons:figma-outline"></iconify-icon></li>
-                        <li><iconify-icon icon="devicon-plain:visualstudio"></iconify-icon></li>
-                        <li><iconify-icon icon="logos:github-icon"></iconify-icon></li>
-                        <li><iconify-icon icon="bi:trello"></iconify-icon></li>
-                        <li><iconify-icon icon="simple-icons:postman"></iconify-icon></li>
-                    </ul>
-                </div>
-            </article>
-        </section>
-        <section id="contact">
-            <h6>Contactez-moi<iconify-icon icon="mdi:hand-wave"></iconify-icon></h6>
-            <article>
-                <p>Envie d’en savoir plus ? Envoyer-moi un message et parlons-en</p>
-                <form action="#">
-                    <input type="text" placeholder="Nom">
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Message">
-                    <button>ENVOYER<iconify-icon id="iconify" icon="ic:outline-mail"></iconify-icon></button>
-                </form>
-            </article>
-        </section>
-    </main>
-    <footer>
-            <h7>TORGUE Maxime</h7>
-            <ul>
-                <li><iconify-icon icon="fa6-brands:square-github"></iconify-icon></li>
-                <li><iconify-icon icon="mdi:linkedin"></iconify-icon></li>
-                <li><iconify-icon icon="fa6-brands:square-twitter"></iconify-icon></li>
-            </ul>
-    </footer>  
+  </header>
+
+  <!-- À PROPOS -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div>
+        <h2>À PROPOS DE MOI</h2>
+        <p>
+          Développeur web formé à l’<strong>École 42</strong>, j’accorde une grande importance à la
+          qualité du code, à l’apprentissage par projets et à la collaboration. Le modèle
+          pédagogique de 42 — pair programming, peer-review et autonomie — m’a appris à
+          résoudre des problèmes concrets, à itérer rapidement et à livrer des produits fiables.
+        </p>
+        <p>
+          Après une première expérience dans d’autres secteurs, je me spécialise en
+          <strong>JavaScript/TypeScript</strong> (Front&nbsp;: React / Vue — Back&nbsp;: Node.js / Express) et
+          en <strong>MongoDB</strong>. J’aime concevoir des interfaces propres, accessibles et
+          performantes, intégrer des services (Stripe, Emailing, Webhooks) et maintenir un
+          workflow Git robuste. Je continue d’élargir mon stack via projets persos et revues de code.
+        </p>
+      </div>
+      <img src="./img/matorgue.jpg" alt="Photo de profil" />
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projects" class="projects">
+    <h2>PROJETS</h2>
+    <div class="carousel" id="carousel"></div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="skills" class="skills">
+    <h2>COMPETENCES</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Front-end</h3>
+        <div class="pillz">
+          <span class="pill"><i class="devicon-html5-plain colored"></i>HTML5</span>
+          <span class="pill"><i class="devicon-css3-plain colored"></i>CSS3</span>
+          <span class="pill"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+          <span class="pill"><i class="devicon-react-original colored"></i>React</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Back-end</h3>
+        <div class="pillz">
+          <span class="pill"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+          <span class="pill"><i class="devicon-express-original"></i>Express</span>
+          <span class="pill"><i class="devicon-mongodb-plain colored"></i>MongoDB</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Outils</h3>
+        <div class="pillz">
+          <span class="pill"><i class="devicon-git-plain colored"></i>Git</span>
+          <span class="pill"><i class="devicon-github-original"></i>GitHub</span>
+          <span class="pill"><i class="devicon-docker-plain colored"></i>Docker</span>
+          <span class="pill"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+          <span class="pill"><i class="devicon-trello-plain colored"></i>Trello</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contactez-moi</h2>
+      <p>Envie d’en savoir plus ? Envoyez-moi un message et parlons-en.</p>
+
+      <!-- Formulaire EmailJS -->
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Nom" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="hidden" name="title" value="Nouveau message du portfolio" />
+        <textarea name="message" rows="5" placeholder="Message" required></textarea>
+        <button class="btn" type="submit">Envoyer</button>
+      </form>
+      <p id="form-status"></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>TORGUE Maxime</div>
+    <div class="social">
+      <a class="chip" href="https://github.com/maxmart26" target="_blank" rel="noopener">GitHub</a>
+      <a class="chip" href="https://www.linkedin.com/in/maxime-torgue-1543b428b/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    /* ====== MENU MOBILE ====== */
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('backdrop');
+
+    function toggleMenu(force) {
+      const willOpen = force !== undefined ? force : !mobileMenu.classList.contains('show');
+      mobileMenu.classList.toggle('show', willOpen);
+      backdrop.classList.toggle('show', willOpen);
+      burger.classList.toggle('active', willOpen);
+      burger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      document.body.style.overflow = willOpen ? 'hidden' : '';
+    }
+
+    burger.addEventListener('click', ()=> toggleMenu());
+    backdrop.addEventListener('click', ()=> toggleMenu(false));
+    mobileMenu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=> toggleMenu(false));
+    });
+
+    /* ====== DATA PROJETS ====== */
+    const projects = [
+  {
+    img: "./img/image-projet/Restrospective_studio.png", // vérifie le nom exact du fichier
+    title: "E-commerce éco-responsable",
+    text: "Projet réalisé avec une collègue de 42 ; je me suis occupé de toute la partie back-end, du paiement et de l’administration.",
+    url: "https://retrospectivestudio.fr/",
+    stack: [
+      { icon: "devicon-nextjs-plain", label: "Next.js" },
+      { icon: "devicon-tailwindcss-original", label: "Tailwind" },
+      { icon: "devicon-typescript-plain", label: "TypeScript" },
+      { icon: "devicon-nodejs-plain colored", label: "Node.js" }
+    ]
+  },
+  {
+    img: "./img/image-projet/trans.png",
+    title: "Dernier projet à 42",
+    text: "Dernier projet à 42, où je me suis occupé du back-end et de la base de données.",
+    url: "https://github.com/maxmart26/transcendance-public",
+    stack: [
+      { icon: "devicon-django-plain", label: "Django" },
+      { icon: "devicon-docker-plain colored", label: "Docker" },
+      { icon: "devicon-postgresql-plain", label: "PostgreSQL" }
+    ]
+  },
+];
+
+    /* ====== CAROUSEL ====== */
+    const carousel = document.getElementById("carousel");
+    const dots = document.getElementById("dots");
+    let current=0,timer;
+
+    projects.forEach((p,i)=>{
+      const slide=document.createElement("article");
+      slide.className="slide"+(i===0?" active":"");
+      slide.innerHTML=`
+        <img src="${p.img}" alt="${p.title}" loading="lazy">
+        <div class="caption">
+          <div class="cap-top">
+            <div class="cap-title">${p.title}</div>
+            <a class="cap-link" href="${p.url}" target="_blank" rel="noopener">Site internet</a>
+          </div>
+          <div class="cap-text">${p.text}</div>
+          <div class="stack">
+            ${p.stack.map(s=>`<span class="badge"><i class="${s.icon}"></i>${s.label}</span>`).join("")}
+          </div>
+        </div>
+      `;
+      carousel.appendChild(slide);
+
+      const dot=document.createElement("button");
+      dot.className="dot"+(i===0?" active":"");
+      dot.textContent=i+1;
+      dot.onclick=()=>show(i);
+      dots.appendChild(dot);
+    });
+
+    const slides=[...document.querySelectorAll(".slide")];
+    const dotBtns=[...document.querySelectorAll(".dot")];
+
+    function show(i){
+      slides[current].classList.remove("active");
+      dotBtns[current].classList.remove("active");
+      slides[i].classList.add("active");
+      dotBtns[i].classList.add("active");
+      current=i; restart();
+    }
+    function next(){show((current+1)%slides.length);}
+    function start(){timer=setInterval(next,4500);}
+    function stop(){clearInterval(timer);}
+    function restart(){stop();start();}
+    start();
+    carousel.addEventListener("mouseenter", stop);
+    carousel.addEventListener("mouseleave", start);
+
+    /* ====== EMAILJS (envoi réel) ====== */
+    (function(){ emailjs.init("ImHVFKtf3GlAkFjJ9"); })(); // Public Key
+
+    const form = document.getElementById("contact-form");
+    const statusTxt = document.getElementById("form-status");
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      statusTxt.textContent = "Envoi en cours...";
+      emailjs.sendForm("service_cyfwg89", "template_mlrtglq", this)
+        .then(() => {
+          statusTxt.textContent = "✅ Message envoyé avec succès !";
+          form.reset();
+        })
+        .catch(err => {
+          console.error(err);
+          statusTxt.textContent = "❌ Erreur d’envoi, vérifie EmailJS.";
+        });
+    });
+  </script>
 </body>
 </html>
